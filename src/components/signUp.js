@@ -1,7 +1,7 @@
-export default function login() {
+export default function signUp() {
     return (
         <main style={{ padding: "1rem 0" }}>
-            <h2>login</h2>
+            <h2>signUp</h2>
         </main>
     );
 }

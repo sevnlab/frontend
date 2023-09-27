@@ -1,25 +1,28 @@
+import React from 'react';
 import logo from './logo.svg';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import './App.css';
 import Login from './components/login';
+import SignUp from './components/signUp';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          테스트코드Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      // <Router>
+      //   <Routes>
+      //     <Route path="/" element={<Login />} />
+      //     <Route path="login" element={<Login />} />
+      //   </Routes>
+      // </Router>
+      <div>
+          <h1>MainPage</h1>
+          <nav>
+              {/*Link 태그의 to 속성은 index.js에서 설정해둔 url의 component가 보여지게 한다.*/}
+              <Link to="/login">login</Link> |{" "}
+              <Link to="/signUp">signUp</Link>
+          </nav>
+      </div>
   );
 }
 
