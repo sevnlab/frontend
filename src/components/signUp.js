@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from "axios";
+import {useState} from "react";
 
 function Copyright(props) {
     return (
@@ -31,13 +33,16 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignUp() {
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+
+        const name = data.get('name');
+        const email = data.get('email');
+        const password = data.get('password');
+
+        postSignUp({ name, email, password });
     };
 
     return (
@@ -62,23 +67,12 @@ export default function SignUp() {
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <TextField
-                                    autoComplete="given-name"
-                                    name="firstName"
                                     required
                                     fullWidth
-                                    id="firstName"
-                                    label="First Name"
-                                    autoFocus
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="lastName"
-                                    label="Last Name"
-                                    name="lastName"
-                                    autoComplete="family-name"
+                                    id="name"
+                                    label="name"
+                                    name="name"
+                                    autoComplete="name"
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -102,18 +96,19 @@ export default function SignUp() {
                                     autoComplete="new-password"
                                 />
                             </Grid>
-                            <Grid item xs={12}>
-                                <FormControlLabel
-                                    control={<Checkbox value="allowExtraEmails" color="primary" />}
-                                    label="I want to receive inspiration, marketing promotions and updates via email."
-                                />
-                            </Grid>
+                            {/*<Grid item xs={12}>*/}
+                            {/*    <FormControlLabel*/}
+                            {/*        control={<Checkbox value="allowExtraEmails" color="primary" />}*/}
+                            {/*        label="I want to receive inspiration, marketing promotions and updates via email."*/}
+                            {/*    />*/}
+                            {/*</Grid>*/}
                         </Grid>
                         <Button
                             type="submit"
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
+                            // onClick={postSignUp}
                         >
                             Sign Up
                         </Button>
@@ -139,3 +134,37 @@ export default function SignUp() {
 //         </main>
 //     );
 // }
+
+function postSignUp(data){
+    // ●●●●●●  axios 간단 설명
+    // method : axios 통신 방식 설정
+    // POST : 데이터를 보낼 때 주로 사용
+    // GET : 데이터를 받아올 때 주로 사용
+    // 이 외에 PUT / DELETE 존재(이번 포스팅에서는 다루지 않습니다)
+    // url : 통신할 URL 설정
+    // data : axios 통신 시, 함께 보낼 데이터 기입
+    // params : axios 통신 시, url 뒤의 파라미터 설정
+    // headers : 데이터 형식 정의
+    //     .then((res)=>{ ... } : 성공 시 작동하는 코드
+    //     .catch(error)=>{ ... } : 실패 시 작동하는 코드
+
+    axios({
+        method: "POST",
+        url: '/signUp',
+        // url: 'http://localhost:7777/signUp',
+        data: {
+            name: data.name,
+            email: data.email,
+            password: data.password
+        },
+        // header에서 JSON 타입의 데이터라는 것을 명시
+        headers: {'Content-type': 'application/json'}
+    }).then((res)=>{
+        alert("성공");
+        // API로 부터 받은 데이터 출력
+        console.log(res.data);
+    }).catch(error=>{
+        console.log("실패");
+        console.log(error);
+    });
+}

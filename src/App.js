@@ -5,19 +5,6 @@ import {useEffect, useState} from "react";
 
 
 function App() {
-
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        fetch("/")
-            .then((res) => {
-                return res.json();
-            })
-            .then(function (result) {
-                setData(result);
-            })
-    }, [])
-
     return (
         <div>
             <h1>MainPage</h1>
@@ -27,9 +14,6 @@ function App() {
                 <Link to="/signIn">로그인</Link> |{" "}
                 <Link to="/signUp">회원가입</Link>
             </nav>
-            <ul>
-                {data.map((v,idx)=><li key={`${idx}-${v}`}>{v}</li>)}
-            </ul>
         </div>
     );
 }
