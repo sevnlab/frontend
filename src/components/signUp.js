@@ -40,9 +40,10 @@ export default function SignUp() {
 
         const name = data.get('name');
         const email = data.get('email');
+        const userId = data.get('userId');
         const password = data.get('password');
 
-        postSignUp({ name, email, password });
+        postSignUp({ name, email, userId, password });
     };
 
     return (
@@ -65,7 +66,8 @@ export default function SignUp() {
                     </Typography>
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
-                            <Grid item xs={12} sm={6}>
+                            {/*<Grid item xs={12} sm={6}>*/}
+                            <Grid item xs={12}>
                                 <TextField
                                     required
                                     fullWidth
@@ -83,6 +85,16 @@ export default function SignUp() {
                                     label="Email Address"
                                     name="email"
                                     autoComplete="email"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    id="userId"
+                                    label="ID"
+                                    name="userId"
+                                    autoComplete="ID"
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -154,6 +166,7 @@ function postSignUp(data){
         data: {
             name: data.name,
             email: data.email,
+            userId: data.userId,
             password: data.password
         },
         // header에서 JSON 타입의 데이터라는 것을 명시
