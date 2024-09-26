@@ -41,7 +41,7 @@ export default function SignIn() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         console.log({
-            email: data.get('email'),
+            userId: data.get('userId'),
             password: data.get('password'),
         });
 
@@ -75,10 +75,10 @@ export default function SignIn() {
                             margin="normal"
                             required
                             fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
+                            id="userId"
+                            label="로그인아이디"
+                            name="userId"
+                            autoComplete="userId"
                             autoFocus
                         />
                         <TextField
@@ -86,7 +86,7 @@ export default function SignIn() {
                             required
                             fullWidth
                             name="password"
-                            label="Password"
+                            label="비밀번호"
                             type="password"
                             id="password"
                             autoComplete="current-password"
@@ -148,10 +148,13 @@ function postSignIn(data){
     }).then((res)=>{
         alert("로그인에 성공했습니다.");
 
-        // API로 부터 받은 데이터 출력
-        console.log(res.data);
+        // 서버로 부터 받은 데이터 출력
+        localStorage.setItem("token", res.data.token)
+        console.log("로그인 성공, 서버로부터 받은 데이터 조회");
+        console.log(res.data)
 
-        data.navigate('/');
+        // 메인 페이지로 이동
+        data.navigate('/main');
 
     }).catch(error=>{
         console.log("로그인 실패");
