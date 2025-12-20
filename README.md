@@ -1,11 +1,43 @@
-노드설치 잘안되면 해당버전으로 받아보기 -> (node-v18.18.0-x64 LTS)
-터미널 command prompt 로 변경하고  
-npm install (안될시 1. 프로젝트 재부팅  2. 컴퓨터 재부팅 or 터미널 설정 확인요망)
+# Frontend Project 🌐
+
+![React](https://img.shields.io/badge/React-18.2.0-blue?style=flat-square&logo=react)
+
+---
+
+## 📌 Project Overview
+이 프로젝트는 **React 기반 프론트엔드 웹 애플리케이션**입니다.  
+백엔드(Spring Boot)와 REST API로 통신하며 사용자 중심의 인터랙티브 UI를 제공합니다.
+
+---
+
+## 🛠 Environment
+
+### 🧠 Core
+- **React:** 19.2.0
+
+### 🛠 Tooling
+- **React DOM:** 19.2.0
+- **Create React App:** 5.0.1
+- **UI Framework:** MUI 5.14.11
+- **CSS-in-JS:** Emotion
+- **Routing:** React Router DOM 6.16.0
+- **HTTP Client:** Axios 1.5.1
+- **Auth Utils:** jwt-decode
+- **Testing:** React Testing Library, Jest
+
+---
+
+## 🚀 Available Scripts
+
+```bash
+# 패키지 설치
+npm install
+
+# 개발 서버 실행
 npm start
 
-To do List
-1. 회원가입 이후 로그인 페이지로 이동
-2. 로그인 페이지 수정
-3. 로그인 이후 페이지 필요
+# 빌드
+npm run build
 
-
+# 테스트 실행
+npm test
