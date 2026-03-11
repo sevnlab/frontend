@@ -178,15 +178,22 @@ function postSignUp(data){
         // header에서 JSON 타입의 데이터라는 것을 명시
         headers: {'Content-type': 'application/json'}
     }).then((res)=>{
-        alert("회원가입에 성공했습니다.");
+        console.log("회원가입 응답:", res.data);
 
-        // API로 부터 받은 데이터 출력
-        console.log(res.data);
+        // 회원가입 성공 메시지 (회원 이름 포함)
+        alert(`${res.data.name}님, 회원가입이 완료되었습니다!`);
 
+        // 로그인 페이지로 이동
         data.navigate('/');
 
-    }).catch(error=>{
-        console.log("실패");
-        console.log(error);
+    }).catch((error)=>{
+        console.log("회원가입 실패:", error);
+
+        if (error.response) {
+            // 서버에서 응답이 온 경우
+            alert("회원가입 실패: " + (error.response.data || "서버 오류"));
+        } else {
+            alert("회원가입 실패: 서버에 연결할 수 없습니다.");
+        }
     });
 }

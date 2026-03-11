@@ -37,9 +37,9 @@ export default function SignIn() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        const userId = data.get('userId');
+        const memberId = data.get('memberId');
         const password = data.get('password');
-        postSignIn({ userId, password, navigate });
+        postSignIn({ memberId, password, navigate });
     };
 
     // 네이버 로그인 처리
@@ -105,10 +105,10 @@ export default function SignIn() {
                             margin="normal"
                             required
                             fullWidth
-                            id="userId"
+                            id="memberId"
                             label="로그인아이디"
-                            name="userId"
-                            autoComplete="userId"
+                            name="memberId"
+                            autoComplete="memberId"
                             autoFocus
                         />
                         <TextField
@@ -175,17 +175,21 @@ function postSignIn(data) {
         method: "POST",
         url: '/signIn',
         data: {
-            userId: data.userId,
+            memberId: data.memberId,
             password: data.password
         },
         headers: {'Content-type': 'application/json'}
     }).then((res) => {
-        alert("로그인에 성공했습니다.");
-        localStorage.setItem("token", res.data.token);
-        data.navigate('/main');
+        if (res.data.resCd === 'S000') {
+            // localStorage.setItem("token", res.data.data.token);
+            localStorage.setItem("name", res.data.data.name);
+            data.navigate('/welcome');
+        } else {
+            alert(res.data.resMsg);
+        }
     }).catch(error => {
         console.log("로그인 실패");
-        console.log(error);
+        alert("서버에 연결할 수 없습니다.");
     });
 }
 
